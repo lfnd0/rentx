@@ -12,10 +12,15 @@
     "/categories": {
       "post": {
         "tags": [
-          "Category"
+          "Categories"
         ],
         "summary": "Create a category",
         "description": "Create a new category.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -48,7 +53,7 @@
       },
       "get": {
         "tags": [
-          "Category"
+          "Categories"
         ],
         "summary": "List all categories",
         "description": "List all categories.",
@@ -80,7 +85,7 @@
     "/categories/import": {
       "post": {
         "tags": [
-          "Category"
+          "Categories"
         ],
         "summary": "Upload a new category",
         "description": "Upload a new category.",
@@ -131,6 +136,40 @@
           }
         }
       }
+    },
+    "/sessions": {
+      "post": {
+        "tags": [
+          "Sessions"
+        ],
+        "summary": "Authentication user",
+        "description": "Authentication user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "E-mail or password incorrect"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -143,6 +182,15 @@
         "description": {
           "type": "string"
         }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
