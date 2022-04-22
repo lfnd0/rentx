@@ -10,6 +10,7 @@ interface IRequest {
   id: string;
   user_id: string;
 }
+
 @injectable()
 class DevolutionRentalUseCase {
   constructor(
@@ -36,8 +37,6 @@ class DevolutionRentalUseCase {
       this.dateProvider.dateNow()
     );
 
-    console.log(daily);
-
     if (daily <= 0) {
       daily = minimum_daily;
     }
@@ -47,10 +46,8 @@ class DevolutionRentalUseCase {
       this.dateProvider.dateNow()
     );
 
-    console.log(delay);
-
     let total = 0;
-    if (delay >= 0) {
+    if (delay > 0) {
       const calculate_fine = delay * car.fine_amount;
       total = calculate_fine;
     }
